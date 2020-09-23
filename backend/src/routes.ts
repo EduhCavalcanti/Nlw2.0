@@ -1,21 +1,18 @@
-import { Router } from 'express';
+import { request, Router } from 'express';
+
 
 const route = Router();
 
+//Rota pra criação da aula
+route.post('/classes', (req, res)=>{
+    const data = req.body;
 
-route.get('/', (req,res)=>{
-    return res.json({"Gostosinho no azeite": "Delicia papai"})
+    console.log(data)
+
+    return res.send(data)
 });
 
-route.post('/create', (req,res)=>{
 
-    let user = {
-        nome: req.body,
-        idade: req.body
-    };
-    return res.json(user)
-    console.log(req.body)
-
-})
+route.get('/',);
 
 export default route;
