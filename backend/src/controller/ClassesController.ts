@@ -32,6 +32,15 @@ export default class ClassesController {
         const timeInMinutes = convertHourToMinutes(time)
 
         const classes = await db('classes')
+        //Verificação pra ver se existe um horário e data disponível
+        .whereExists(function(){//Querry complexa do 0 
+            this.select('class_schedule.*')
+            .from('class_schedule')
+            .whereRaw('`class_schedule`.`class_id` = `classes`. `id`')
+            .whereRaw('`class_schedule`.`week_day` = ??', [Number(week_day)])
+            .whereRaw('`class_schedule`.`from` <= ??', [timeInMinutes])
+            .whereRaw('`class_schedule`.`to` > ??', [timeInMinutes])
+        })
         .where('classes.subject', '=' , subject)
         .join('users', 'classes.user_id', '=', 'users.id')
         .select(['classes.*', 'users.*'])

@@ -16,7 +16,7 @@ export async function up(knex: Knex){
 
         //Campo de quando foi feita conexão
         table.timestamp('created_at')
-        .defaultTo('now()')
+        .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
         .notNullable()
     });
 };
