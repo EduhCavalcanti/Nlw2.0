@@ -8,6 +8,7 @@ import './styles.css'
 
 interface PageHeaderProps{
     title: string;
+    descripions?: string;//Se usa interrogção quando não for obrigado usar uma props
 }
 
 const PageHeader: React.FC<PageHeaderProps> = (props) =>{
@@ -22,6 +23,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) =>{
 
             <div className="header-content">
                 <strong>{props.title}</strong>
+                { props.descripions ? <p>{props.descripions}</p> : null } 
                 {props.children}
 
             </div>
